@@ -1,88 +1,153 @@
-* Changes
-** Changes for 0.9.0
-*** New features
-**** =yas-key-syntaxes= is much more powerful and accepts functions
-     Enables use cases when discovering keys based on buffer syntax is
-     not good enough. See issue #497.
-**** Documentation rewritten in org-mode and updated
-     A tremendous effort by Noam Postavsky. Hopefully easier to
-     maintain and navigate. Available at
-     http://capitaomorte.github.io/yasnippet/.
-**** Snippets are now maintained in their own repo
-     Snippets live in Andrea Crotti's
-     =https://github.com/andreacrotti/yasnippet-snippets=. See
-     README.md for more details.
-**** Textmate snippet imported moved to separate =yasmate= repo
-     URL is =https://github.com/capitaomorte/yasmate=. See README.md
-     for more details.
-**** =yas-snippet-dirs= now allows symbols as aliases to directories
-     The added level of indirection should allow more esoteric
-     configurations. See Github #495.
-**** =yas-reload-all= can now jit-load when called interactively
-**** Tests run automatically in the Travis CI system
-**** New =yas-after-reload-hook= run after =yas-reload-all=
-     See https://github.com/pezra/rspec-mode/pull/75 for the
-     discussion leading up to this change.
-**** New functions =yas-activate-extra-mode= and =yas-deactivate-extra-mode=
-     These are preferable to setting =yas-extra-modes= directly in the
-     mode hook. See issue #420 for more information.
-**** New variable =yas-new-snippet-default=
-     The default snippet suggested on =yas-new-snippet= can now be
-     customized.
+* 0.9.1 (est. February 2016)
+** New features
 
-*** Fixed bugs
-    
-    TODO: harvest most "Fix XXX" references from the comments and add
-    each as a single heading. A googlecode tracker bug should be "Fix
-    Googlecode 123" whereas a github tracker bug should be "Fix Github
-    #123". If a summarized description can be done in a few words, add
-    it, otherwise don't care.
+*** =yas-key-syntaxes= is much more powerful and accepts functions
 
-**** Github #527, #525 and #526: Attempt to prevent "fallback loops"
-     When interactiing with other extensions that use similar fallback
-     mechanisms.
+    Enables use cases when discovering keys based on buffer syntax is
+    not good enough. See issue #497.
 
-** Changes for 0.8.0
-*** New features
-**** All YASnippet symbols being with =yas-=. Keep old =yas/= versions as aliases
-**** Yasnippet is now Free Software Foundation's copyright
-**** =yas-dont-activate= can be a list of functions
-**** Snippets are loaded just-in-time 
-     Thanks to Matthew Fidler for a lot of input with the implementation.
-**** =yasnippet-bundle.el= is no longer available
-     Use =yas-compile-directory= instead if you need the speed advantage.
-**** New functions =yas-compile-directory= and  =yas-recompile-all=
-     This feature is still undocumented.  Generate a
-     =.yas-compiled-snippets.el= file in the directory passed where
-     snippets are compiled into emacs-lisp code.
-**** New =yas-verbosity= variable
-**** Interactively calling =yas-exit-snippet= exist most recently inserted snippet
-**** Using filenames as snippet triggers is deprecated
-**** Default value of =yas-show-menu-p= is =abbreviate=
-**** =yas-visit-snippet= ignores =yas-prompt-functions=
-**** =yas-buffer-local-condition=  restricted to trigger-key expansions by default
-**** =yas-load-snippet-buffer= (=C-c C-c=) in =snippet-mode= has been much improved
-**** New variable =yas-expand-only-for-last-commands=, thanks Erik Postma
-**** New variable =yas-extra-modes= aliases old =yas/mode-symbol=
-**** New =yas-describe-tables= command
-**** New =yas-define-condition-cache= macro
-     This defines an optimised function for placing in a =#
-     condition:= directive that will run at most once per
-     snippet-expansion attempt.
-**** Mirrors can occur inside fields
-**** New =# type: command= directive
-     This feature is still undocumented
-**** A hidden =.yas-setup.el= is loaded if found in a snippet directory
-**** =yas/wrap-around-region= can now also be =cua= (undocumented feature)
-**** Make menu groups automatically using new  =.yas-make-groups= file
-**** Per-snippet keybindings using =# keybinding:= directive
-**** More friendly =yas/expand-snippet= calling convention
-     This breaks backward compatibility.
-**** The =# env:= directive is now =# expand-env:=
-**** Setup multiple parent modes using new =.yas-parents= file
-*** Fixed bugs
-    TODO: harvest most "Fix XXX" references from the comments and add
-    each as a single heading. A googlecode tracker bug should be "Fix
-    Googlecode 123" whereas a github tracker bug should be "Fix Github
-    #123". If a summarized description can be done in a few words, add
-    it, otherwise don't care.
+*** Documentation rewritten in org-mode and updated
+
+    A tremendous effort by Noam Postavsky. Hopefully easier to
+    maintain and navigate. Available at
+    http://capitaomorte.github.io/yasnippet/.
+
+*** Snippets are now maintained in their own repo
+
+    Snippets live in Andrea Crotti's
+    =https://github.com/andreacrotti/yasnippet-snippets=. See
+    README.md for more details.
+
+*** Textmate snippet imported moved to separate =yasmate= repo
+
+    URL is =https://github.com/capitaomorte/yasmate=. See README.md
+    for more details.
+
+*** =yas-snippet-dirs= now allows symbols as aliases to directories
+
+    The added level of indirection should allow more esoteric
+    configurations. See Github #495.
+
+*** =yas-reload-all= can now jit-load when called interactively
+
+*** Tests run automatically in the Travis CI system
+
+*** New =yas-after-reload-hook= run after =yas-reload-all=
+
+    See https://github.com/pezra/rspec-mode/pull/75 for the
+    discussion leading up to this change.
+
+*** New functions =yas-activate-extra-mode= and =yas-deactivate-extra-mode=
+
+    These are preferable to setting =yas-extra-modes= directly in the
+    mode hook. See issue #420 for more information.
+
+*** New variable =yas-new-snippet-default=
+
+    The default snippet suggested on =yas-new-snippet= can now be
+    customized.
+
+** Fixed bugs
+   
+   # TODO: harvest most "Fix XXX" references from the comments and add
+   # each as a single heading. A googlecode tracker bug should be "Fix
+   # Googlecode 123" whereas a github tracker bug should be "Fix Github
+   # #123". If a summarized description can be done in a few words, add
+   # it, otherwise don't care.
+
+*** Github #527, #525 and #526: Attempt to prevent "fallback loops"
+
+    When interactiing with other extensions that use similar fallback
+    mechanisms.
+
+* 0.8.0 (August 2012)
+
+** New features
+
+*** All YASnippet symbols being with =yas-=. Keep old =yas/= versions as aliases
+
+*** Yasnippet is now Free Software Foundation's copyright
+
+*** =yas-dont-activate= can be a list of functions
+
+*** Snippets are loaded just-in-time 
+
+    Thanks to Matthew Fidler for a lot of input with the implementation.
+
+*** =yasnippet-bundle.el= is no longer available
+
+    Use =yas-compile-directory= instead if you need the speed advantage.
+
+*** New functions =yas-compile-directory= and  =yas-recompile-all=
+
+    This feature is still undocumented.  Generate a
+    =.yas-compiled-snippets.el= file in the directory passed where
+    snippets are compiled into emacs-lisp code.
+
+*** New =yas-verbosity= variable
+
+*** Interactively calling =yas-exit-snippet= exist most recently inserted snippet
+
+*** Using filenames as snippet triggers is deprecated
+
+*** Default value of =yas-show-menu-p= is =abbreviate=
+
+*** =yas-visit-snippet= ignores =yas-prompt-functions=
+
+*** =yas-buffer-local-condition=  restricted to trigger-key expansions by default
+
+*** =yas-load-snippet-buffer= (=C-c C-c=) in =snippet-mode= has been much improved
+
+*** New variable =yas-expand-only-for-last-commands=, thanks Erik Postma
+
+*** New variable =yas-extra-modes= aliases old =yas/mode-symbol=
+
+*** New =yas-describe-tables= command
+
+*** New =yas-define-condition-cache= macro
+
+    This defines an optimised function for placing in a =#
+    condition:= directive that will run at most once per
+    snippet-expansion attempt.
+
+*** Mirrors can occur inside fields
+
+*** New =# type: command= directive
+
+    This feature is still largely undocumented.
+
+*** A hidden =.yas-setup.el= is loaded if found in a snippet directory
+
+*** =yas/wrap-around-region= can now also be =cua= (undocumented feature)
+
+*** Make menu groups automatically using new  =.yas-make-groups= file
+
+*** Per-snippet keybindings using =# keybinding:= directive
+
+*** More friendly =yas/expand-snippet= calling convention
+
+    This breaks backward compatibility.
+
+*** The =# env:= directive is now =# expand-env:=
+
+*** Setup multiple parent modes using new =.yas-parents= file
+
+** Fixed bugs
+
+*** Github #281: jit-load snippets in the correct order
+
+*** Github #245: primary field transformations work inside nested fields
+
+*** Github #242: stop using the deprecated =assoc= library
+
+*** Github #233: show direct snippet keybindings in the menu
+
+*** Github #193, Googlecode 192: Compatibility with =fci-mode=
+
+*** Github #147, Googlecode 145: Snippets comments were getting inserted
+
+*** Github #141, Googlecode 139: searching buffer in embedded elisp works (slightly) better
+
+*** Github #95, Googlecode 193: no more stack overflow in org-mode
+
+*** Github #285, #248
