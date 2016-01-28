@@ -35,8 +35,6 @@
     But marked obsolete, use (yas-global-mode +1) instead.  See Github
     #546, #569.
 
-*** Github #537: Be lenient to extensions operating on snippet fields
-
 *** =yas-key-syntaxes= is much more powerful and accepts functions
 
     Enables use cases when discovering keys based on buffer syntax is
@@ -66,8 +64,6 @@
 
 *** =yas-reload-all= can now jit-load when called interactively
 
-*** Tests run automatically in the Travis CI system
-
 *** New =yas-after-reload-hook= run after =yas-reload-all=
 
     See https://github.com/pezra/rspec-mode/pull/75 for the
@@ -89,6 +85,8 @@
 
     Previously it was setting =this-original-command=, which does not
     match the documented semantics.  See Github #587.
+
+*** Github #537: Be lenient to extensions operating on snippet fields
 
 *** Github #619: Parents of extra modes are now activated too
 
@@ -118,7 +116,7 @@
 
 ** Changes and New Features
 
-*** All YASnippet symbols being with =yas-=. Keep old =yas/= versions as aliases
+*** All YASnippet symbols now prefixed with =yas-=.  Keep old =yas/= versions as aliases
 
 *** Yasnippet is now Free Software Foundation's copyright
 
@@ -132,7 +130,7 @@
 
     Use =yas-compile-directory= instead if you need the speed advantage.
 
-*** New functions =yas-compile-directory= and  =yas-recompile-all=
+*** New functions =yas-compile-directory= and =yas-recompile-all=
 
     This feature is still undocumented.  Generate a
     =.yas-compiled-snippets.el= file in the directory passed where
@@ -140,7 +138,7 @@
 
 *** New =yas-verbosity= variable
 
-*** Interactively calling =yas-exit-snippet= exist most recently inserted snippet
+*** Interactively calling =yas-exit-snippet= exits most recently inserted snippet
 
 *** Using filenames as snippet triggers is deprecated
 
@@ -148,7 +146,7 @@
 
 *** =yas-visit-snippet= ignores =yas-prompt-functions=
 
-*** =yas-buffer-local-condition=  restricted to trigger-key expansions by default
+*** =yas-buffer-local-condition= restricted to trigger-key expansions by default
 
 *** =yas-load-snippet-buffer= (=C-c C-c=) in =snippet-mode= has been much improved
 
@@ -172,13 +170,13 @@
 
 *** A hidden =.yas-setup.el= is loaded if found in a snippet directory
 
-*** =yas/wrap-around-region= can now also be =cua= (undocumented feature)
+*** =yas-wrap-around-region= can now also be =cua= (undocumented feature)
 
 *** Make menu groups automatically using new  =.yas-make-groups= file
 
 *** Per-snippet keybindings using =# keybinding:= directive
 
-*** More friendly =yas/expand-snippet= calling convention
+*** More friendly =yas-expand-snippet= calling convention
 
     This breaks backward compatibility.
 
@@ -205,5 +203,3 @@
     Issue is still open for analysis, though
 
 *** Github #95, Googlecode 193: no more stack overflow in org-mode
-
-*** Github #285, #248
