@@ -142,11 +142,13 @@
 
 *** Github #233: show direct snippet keybindings in the menu
 
-*** Github #193, Googlecode 192: Compatibility with =fci-mode=
+*** Github #194, Googlecode 192: Compatibility with =fci-mode=
 
 *** Github #147, Googlecode 145: Snippets comments were getting inserted
 
-*** Github #141, Googlecode 139: searching buffer in embedded elisp works (slightly) better
+*** Github #141, Googlecode 139: searching buffer in embedded elisp works slightly better
+
+    Issue is still open for analysis, though
 
 *** Github #95, Googlecode 193: no more stack overflow in org-mode
 
