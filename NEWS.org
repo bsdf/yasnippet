@@ -1,5 +1,41 @@
 * 0.9.1 (est. February 2016)
-** New features
+** Changes and New Features
+
+*** Noam Postavsky is now the official yasnippet maintainer
+
+*** =yas-visit-snippet-file= now works for compiled snippets (see Github #597)
+
+*** New function =yas-lookup-snippet= (see Github #595, #596)
+
+*** .emacs.d/snippets directory is now created automatically
+
+    If that value is present in =yas-snippet-dirs= (see Github #648).
+
+*** Default value for =yas-snippet-dirs= now uses =user-emacs-directory=
+
+    Instead of hardcoding "~/emacs.d" (see Github #632).
+
+*** The choice of ido prompting no longer depends on Emacs version.
+
+    The new function =yas-maybe-ido-prompt= (which performs ido
+    prompting if =ido-mode= is enabled) replaces =yas-ido-prompt=
+    (which always performs ido prompting).
+
+*** =yas-visit-snippet-file= no longer overrides =yas-prompt-functions=
+    See Github #576.
+
+*** The default value of =yas-buffer-local-condition= now works for =yas-insert-snippet= too.
+    See Github #305.
+
+*** Snippet fields are only cleared by commands with =delete-selection= property
+    See Github #515, #644.
+
+*** =yas-initialize= (and backward compat alias `yas/initialize') are restored
+
+    But marked obsolete, use (yas-global-mode +1) instead.  See Github
+    #546, #569.
+
+*** Github #537: Be lenient to extensions operating on snippet fields
 
 *** =yas-key-syntaxes= is much more powerful and accepts functions
 
@@ -48,12 +84,30 @@
     customized.
 
 ** Fixed bugs
-   
-   # TODO: harvest most "Fix XXX" references from the comments and add
-   # each as a single heading. A googlecode tracker bug should be "Fix
-   # Googlecode 123" whereas a github tracker bug should be "Fix Github
-   # #123". If a summarized description can be done in a few words, add
-   # it, otherwise don't care.
+
+*** =yas-expand= now sets =this-command= when falling back to another command
+
+    Previously it was setting =this-original-command=, which does not
+    match the documented semantics.  See Github #587.
+
+*** Github #619: Parents of extra modes are now activated too
+
+*** Github #549: =yas-verbosity= is now applied to =load= calls too
+
+*** Github #607; avoid obscure Emacs bug triggered by overlays in *Messages* buffer
+
+    It was triggered by yasnippet+flycheck+highlight-parentheses.  See
+    also http://debbugs.gnu.org/cgi/bugreport.cgi?bug=21824
+
+*** Github #617; fix x prompt when snippet inserts many lines
+
+*** Github #618; avoid breakage if =scan-sexp= modifies match data
+
+    Which it does in Emacs 25.
+
+*** Github #562: Deleting inner numberless snippet caused an error
+
+*** Github #418, #536: Fix navigation to zero-length fields at snippet end
 
 *** Github #527, #525 and #526: Attempt to prevent "fallback loops"
 
@@ -62,7 +116,7 @@
 
 * 0.8.0 (August 2012)
 
-** New features
+** Changes and New Features
 
 *** All YASnippet symbols being with =yas-=. Keep old =yas/= versions as aliases
 
