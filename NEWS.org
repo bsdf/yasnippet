@@ -15,17 +15,27 @@
 
     Instead of hardcoding "~/emacs.d" (see Github #632).
 
-*** The choice of ido prompting no longer depends on Emacs version.
-
-    The new function =yas-maybe-ido-prompt= (which performs ido
-    prompting if =ido-mode= is enabled) replaces =yas-ido-prompt=
-    (which always performs ido prompting).
-
 *** =yas-visit-snippet-file= no longer overrides =yas-prompt-functions=
     See Github #576.
 
+*** The defaults for prompting have changed.
+
+    =yas-x-prompt= is no longer present in the default value of
+    =yas-prompt-functions=.
+
+    The new function =yas-maybe-ido-prompt= (which performs ido
+    prompting if =ido-mode= is enabled) replaces =yas-ido-prompt=
+    (which always performs ido prompting).  Previously the behaviour
+    was dependent on the Emacs version being used.
+
 *** The default value of =yas-buffer-local-condition= now works for =yas-insert-snippet= too.
     See Github #305.
+
+*** The default value of =yas-new-snippet-default= no longer inserts =require-final-newline: nil=
+
+    It was redundant, since =mode: snippet= already accomplishes the
+    same.  =binding: ${4:direct-keybinding}}= is also removed, as it
+    is hardly ever wanted.
 
 *** Snippet fields are only cleared by commands with =delete-selection= property
     See Github #515, #644.
