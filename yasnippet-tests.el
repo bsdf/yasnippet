@@ -173,6 +173,25 @@
     (ert-simulate-command '(yas-prev-field))
     (should (looking-at "little sibling"))))
 
+(ert-deftest basic-indentation ()
+  (with-temp-buffer
+    (ruby-mode)
+    (yas-minor-mode 1)
+    (set (make-local-variable 'yas-indent-line) 'auto)
+    (set (make-local-variable 'yas-also-auto-indent-first-line) t)
+    (yas-expand-snippet "def ${1:method}${2:(${3:args})}\n$0\nend")
+    (cl-loop repeat 3 do (ert-simulate-command '(yas-next-field)))
+    (ert-simulate-command
+     `(yas-mock-insert ,(make-string (random 5) ? ))) ; purposedly mess up indentation
+    (yas-expand-snippet "class << ${self}\n$0\nend")
+    (ert-simulate-command '(yas-next-field))
+    (should (string= "def method(args)
+  class << self
+    
+  end
+end" (buffer-string)))
+    (should (= 4 (current-column)))))
+
 (ert-deftest navigate-a-snippet-with-multiline-mirrors-issue-665 ()
   ;; In issue 665, a multi-line mirror is attempted. Indentation
   ;; doesn't (yet) happen on these mirrors, but let this test guard
@@ -180,15 +199,25 @@
   ;; incorrect implementation of mirror auto-indentation
   ;; 
   (with-temp-buffer
+    (ruby-mode)
     (yas-minor-mode 1)
-    (yas-expand-snippet "brother ($1) $2${1:$(mapconcat #'identity (split-string yas-text) \"\n\")}end")
-    (ert-simulate-command `(yas-mock-insert "bla ble bli"))
+    (yas-expand-snippet "def initialize(${1:params})\n$2${1:$(
+mapconcat #'(lambda (arg)
+                 (format \"@%s = %s\" arg arg))
+             (split-string yas-text \", \")
+             \"\n\")}\nend")
+    (ert-simulate-command `(yas-mock-insert "bla, ble, bli"))
     (ert-simulate-command '(yas-next-field))
-    (should (looking-at "bla\n[[:blank:]]*ble\n[[:blank:]]*bliend"))
-    (ert-simulate-command `(yas-mock-insert "blo"))
-    (ert-simulate-command '(yas-prev-field))
-    (ert-simulate-command '(yas-next-field))
-    (should (looking-at "blobla\n[[:blank:]]*ble\n[[:blank:]]*bliend"))))
+    (let ((expected (mapconcat #'identity
+                               '("@bla = bla"
+                                 "[[:blank:]]*@ble = ble"
+                                 "[[:blank:]]*@bli = bli")
+                               "\n")))
+      (should (looking-at expected))
+      (ert-simulate-command `(yas-mock-insert "blo"))
+      (ert-simulate-command '(yas-prev-field))
+      (ert-simulate-command '(yas-next-field))
+      (should (looking-at (concat "blo" expected))))))
 
 
 ;;; Snippet expansion and character escaping
