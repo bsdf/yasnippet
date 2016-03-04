@@ -173,6 +173,23 @@
     (ert-simulate-command '(yas-prev-field))
     (should (looking-at "little sibling"))))
 
+(ert-deftest navigate-a-snippet-with-multiline-mirrors-issue-665 ()
+  ;; In issue 665, a multi-line mirror is attempted. Indentation
+  ;; doesn't (yet) happen on these mirrors, but let this test guard
+  ;; against any misnavigations that might be introduced by an
+  ;; incorrect implementation of mirror auto-indentation
+  ;; 
+  (with-temp-buffer
+    (yas-minor-mode 1)
+    (yas-expand-snippet "brother ($1) $2${1:$(mapconcat #'identity (split-string yas-text) \"\n\")}end")
+    (ert-simulate-command `(yas-mock-insert "bla ble bli"))
+    (ert-simulate-command '(yas-next-field))
+    (should (looking-at "bla\n[[:blank:]]*ble\n[[:blank:]]*bliend"))
+    (ert-simulate-command `(yas-mock-insert "blo"))
+    (ert-simulate-command '(yas-prev-field))
+    (ert-simulate-command '(yas-next-field))
+    (should (looking-at "blobla\n[[:blank:]]*ble\n[[:blank:]]*bliend"))))
+
 
 ;;; Snippet expansion and character escaping
 ;;; Thanks to @zw963 (Billy) for the testing
@@ -855,6 +872,7 @@ add the snippets associated with the given mode."
                         (yas--buffer-contents))))))
 
 (defun yas-mock-insert (string)
+  (interactive)
   (dotimes (i (length string))
     (let ((last-command-event (aref string i)))
       (ert-simulate-command '(self-insert-command 1)))))
